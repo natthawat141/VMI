@@ -53,9 +53,9 @@ export const metadata: Metadata = {
       "สร้างสรรค์ประสบการณ์ดิจิทัลที่น่าหลงใหล ผ่าน AR, Music Marketing, Event Organizing และ Website Creation",
     images: [
       {
-        url: "/images/og-image.jpg", // Create this image (1200x630)
-        width: 1200,
-        height: 630,
+        url: "/images/logo.png",
+        width: 512,
+        height: 512,
         alt: "VMI Media - Visualize Media Innovation",
       },
     ],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "VMI Media | Visualize Media Innovation",
     description:
       "สร้างสรรค์ประสบการณ์ดิจิทัลที่น่าหลงใหล ผ่าน AR, Music Marketing และอื่นๆ",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
     creator: "@vmimedia", // Update with your Twitter handle
   },
   robots: {
