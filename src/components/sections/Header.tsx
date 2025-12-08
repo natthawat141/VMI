@@ -4,18 +4,20 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-
-const navItems = [
-  { label: "Solutions", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, toggleLanguage } = useLanguage();
+  const t = useTranslation();
+
+  const navItems = [
+    { label: t.nav.solutions, href: "#services" },
+    { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,8 +30,8 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-[#121212]/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        ? "bg-[#121212]/95 backdrop-blur-md shadow-lg"
+        : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -78,7 +80,7 @@ export default function Header() {
               href="#contact"
               className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full gradient-coral text-white font-medium text-sm hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-[#FF6A6A]/25"
             >
-              {language === "th" ? "ติดต่อเรา" : "Get in Touch"}
+              {t.nav.touch}
             </Link>
           </div>
 
@@ -147,7 +149,7 @@ export default function Header() {
                 className="inline-flex items-center px-5 py-2.5 rounded-full gradient-coral text-white font-medium text-sm"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {language === "th" ? "ติดต่อเรา" : "Get in Touch"}
+                {t.nav.touch}
               </Link>
             </li>
           </ul>

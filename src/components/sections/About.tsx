@@ -2,10 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const t = useTranslation();
+
+  const stats = [
+    { label: t.about.stats_projects, value: "100+" },
+    { label: t.about.stats_clients, value: "50+" },
+    { label: t.about.stats_years, value: "5+" },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,11 +33,7 @@ export default function About() {
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="py-20 md:py-32 relative overflow-hidden"
-    >
+    <section id="about" ref={sectionRef} className="py-20 md:py-32 bg-[#121212]">
       {/* Background decorations */}
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#FF6A6A]/5 rounded-full blur-[100px]" />
 
@@ -40,88 +44,80 @@ export default function About() {
             }`}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Who <span className="gradient-coral-text">We Are</span>
+            {t.about.title_1} <span className="gradient-coral-text">{t.about.title_highlight}</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Innovating the digital landscape one project at a time
+            {t.about.subtitle}
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Founder Image */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Image Column */}
           <div
-            className={`relative transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+            className={`relative transition-all duration-700 delay-200 ${isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-10"
               }`}
           >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass">
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
               <Image
                 src="/Founder/dul.jpg"
-                alt="VMI Media Founder"
+                alt={t.about.founders}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent" />
-
-              {/* Info badge */}
-              <div className="absolute bottom-6 left-6 right-6 glass rounded-xl p-4">
-                <h3 className="text-white font-semibold text-lg">VMI Media Team</h3>
-                <p className="text-gray-400 text-sm">Founders & Creative Directors</p>
+              {/* Overlay with details */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
+              <div className="absolute bottom-0 left-0 p-8">
+                <p className="text-[#FF6A6A] font-medium mb-1">{t.about.founding_team}</p>
+                <h3 className="text-white text-2xl font-bold">{t.about.founders}</h3>
               </div>
             </div>
 
-            {/* Decorative frame */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-[#FF6A6A]/20 rounded-2xl -z-10" />
+            {/* Decorative blob behind */}
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-radial from-[#FF6A6A]/10 to-transparent blur-[60px]" />
           </div>
 
-          {/* About Content */}
+          {/* Content Column */}
           <div
-            className={`transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+            className={`space-y-8 transition-all duration-700 delay-400 ${isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-10"
               }`}
           >
-            <div className="glass rounded-2xl p-8 md:p-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-1 gradient-coral rounded-full" />
-                <span className="text-[#FF6A6A] font-medium">Our Story</span>
+            <div>
+              <div className="inline-block px-4 py-1 rounded-full bg-[#FF6A6A]/10 text-[#FF6A6A] text-sm font-medium mb-4">
+                {t.about.story_label}
               </div>
-
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-                Visualize Media Innovation Co., Ltd.
+                {t.about.company_name}
               </h3>
-
-              <div className="space-y-4 text-gray-300 leading-relaxed">
+              <div className="space-y-4 text-gray-400 leading-relaxed">
                 <p>
-                  VMI Media is a creative digital agency that specializes in bringing
-                  innovative ideas to life. We combine cutting-edge technology with
-                  creative storytelling to deliver exceptional results for our clients.
+                  {t.about.p1}
                 </p>
                 <p>
-                  From augmented reality experiences that captivate audiences to music
-                  marketing campaigns that drive engagement, we handle every aspect of
-                  digital media with passion and precision.
+                  {t.about.p2}
                 </p>
                 <p>
-                  Our team of experts is dedicated to pushing boundaries and creating
-                  digital experiences that leave lasting impressions.
+                  {t.about.p3}
                 </p>
               </div>
+            </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 mt-8 pt-8 border-t border-white/10">
-                <div>
-                  <div className="text-3xl font-bold gradient-coral-text">50+</div>
-                  <div className="text-gray-500 text-sm">Projects</div>
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+              {stats.map((stat, index) => (
+                <div key={index}>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-1 gradient-coral-text">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-500 font-medium tracking-wide uppercase">
+                    {stat.label}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-3xl font-bold gradient-coral-text">30+</div>
-                  <div className="text-gray-500 text-sm">Clients</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold gradient-coral-text">3+</div>
-                  <div className="text-gray-500 text-sm">Years</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

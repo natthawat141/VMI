@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const contactLinks = [
   {
@@ -49,6 +50,7 @@ const contactLinks = [
 export default function Contact() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const t = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,33 +82,30 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           {/* Section Title */}
           <div
-            className={`text-center mb-12 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Let&apos;s <span className="gradient-coral-text">Connect</span>
+              {t.contact.title_1} <span className="gradient-coral-text">{t.contact.title_highlight}</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Ready to bring your vision to life? Get in touch with us today.
+              {t.contact.subtitle}
             </p>
           </div>
 
           {/* Contact Card */}
           <div
-            className={`glass rounded-3xl p-8 md:p-12 transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`glass rounded-3xl p-8 md:p-12 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             <div className="grid md:grid-cols-2 gap-10">
               {/* Left - Info */}
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4">
-                  Get in Touch
+                  {t.contact.get_in_touch}
                 </h3>
                 <p className="text-gray-400 mb-8 leading-relaxed">
-                  We&apos;d love to hear about your project. Reach out through any of
-                  our channels and let&apos;s create something amazing together.
+                  {t.contact.desc}
                 </p>
 
                 {/* Contact Links */}
@@ -157,16 +156,16 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h4 className="text-xl font-semibold text-white mb-2">
-                  Start a Conversation
+                  {t.contact.start_convo}
                 </h4>
                 <p className="text-gray-400 text-sm mb-6">
-                  Tell us about your project and we&apos;ll get back to you within 24 hours.
+                  {t.contact.response_time}
                 </p>
                 <Link
                   href="mailto:contact@vmimedia.com"
                   className="inline-flex items-center px-8 py-4 rounded-full gradient-coral text-white font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-[#FF6A6A]/25"
                 >
-                  Send us a Message
+                  {t.contact.send_message}
                   <svg
                     className="w-5 h-5 ml-2"
                     fill="none"

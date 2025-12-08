@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // Categories based on folder structure
 const categories = ["All", "AR", "Music Marketing", "Event Organize", "Website Creation"];
@@ -122,6 +123,7 @@ export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const sectionRef = useRef<HTMLDivElement>(null);
+  const t = useTranslation();
 
   // Video refs to handle hover play
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
@@ -161,6 +163,18 @@ export default function Portfolio() {
     }
   };
 
+  // Helper to get localized category name
+  const getCategoryName = (cat: string) => {
+    switch (cat) {
+      case "All": return t.portfolio.categories.all;
+      case "AR": return t.portfolio.categories.ar;
+      case "Music Marketing": return t.portfolio.categories.music;
+      case "Event Organize": return t.portfolio.categories.events;
+      case "Website Creation": return t.portfolio.categories.web;
+      default: return cat;
+    }
+  };
+
   return (
     <section
       id="portfolio"
@@ -178,10 +192,10 @@ export default function Portfolio() {
             }`}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Our <span className="gradient-coral-text">Portfolio</span>
+            {t.portfolio.title_1} <span className="gradient-coral-text">{t.portfolio.title_highlight}</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Explore our latest projects and creative works
+            {t.portfolio.subtitle}
           </p>
         </div>
 
@@ -199,7 +213,7 @@ export default function Portfolio() {
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
                 }`}
             >
-              {category}
+              {getCategoryName(category)}
             </button>
           ))}
         </div>
@@ -255,7 +269,7 @@ export default function Portfolio() {
 
                 {/* View button */}
                 <button className="mt-4 inline-flex items-center text-white text-sm font-medium group/btn">
-                  <span>View Project</span>
+                  <span>{t.portfolio.view_project}</span>
                   <svg
                     className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform"
                     fill="none"
@@ -284,7 +298,7 @@ export default function Portfolio() {
             }`}
         >
           <button className="inline-flex items-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all duration-300">
-            View All Projects
+            {t.portfolio.view_all}
             <svg
               className="w-5 h-5 ml-2"
               fill="none"

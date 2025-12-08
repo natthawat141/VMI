@@ -1,19 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
-const footerLinks = {
-  solutions: [
-    { label: "Augmented Reality", href: "#services" },
-    { label: "Music Marketing", href: "#services" },
-    { label: "Event Organizing", href: "#services" },
-    { label: "Website Creation", href: "#services" },
-  ],
-  company: [
-    { label: "About Us", href: "#about" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Contact", href: "#contact" },
-  ],
-};
+import { useTranslation } from "@/hooks/useTranslation";
 
 const socialLinks = [
   {
@@ -37,6 +26,22 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const t = useTranslation();
+
+  const footerLinks = {
+    solutions: [
+      { label: t.services.items.ar.title, href: "#services" },
+      { label: t.services.items.music.title, href: "#services" },
+      { label: t.services.items.events.title, href: "#services" },
+      { label: t.services.items.web.title, href: "#services" },
+    ],
+    company: [
+      { label: t.nav.about, href: "#about" },
+      { label: t.nav.portfolio, href: "#portfolio" },
+      { label: t.nav.contact, href: "#contact" },
+    ],
+  };
+
   return (
     <footer className="bg-black pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6">
@@ -57,8 +62,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-gray-500 mb-6 max-w-sm leading-relaxed">
-              Visualize Media Innovation Co., Ltd. - Creating captivating digital
-              experiences through AR, music marketing, events, and web solutions.
+              {t.footer.brand_desc}
             </p>
 
             {/* Social Links */}
@@ -78,7 +82,7 @@ export default function Footer() {
 
           {/* Solutions Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Solutions</h4>
+            <h4 className="font-semibold text-white mb-4">{t.footer.solutions}</h4>
             <ul className="space-y-3">
               {footerLinks.solutions.map((link) => (
                 <li key={link.label}>
@@ -95,7 +99,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Company</h4>
+            <h4 className="font-semibold text-white mb-4">{t.footer.company}</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
