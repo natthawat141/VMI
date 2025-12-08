@@ -33,7 +33,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 md:py-32 bg-[#121212]">
+    <section id="about" ref={sectionRef} className="relative overflow-hidden py-20 md:py-32 bg-[#121212]">
       {/* Background decorations */}
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#FF6A6A]/5 rounded-full blur-[100px]" />
 
@@ -55,8 +55,8 @@ export default function About() {
           {/* Image Column */}
           <div
             className={`relative transition-all duration-700 delay-200 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-10"
               }`}
           >
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
@@ -82,8 +82,8 @@ export default function About() {
           {/* Content Column */}
           <div
             className={`space-y-8 transition-all duration-700 delay-400 ${isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-10"
               }`}
           >
             <div>
