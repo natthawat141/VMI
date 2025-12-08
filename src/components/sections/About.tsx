@@ -36,9 +36,8 @@ export default function About() {
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Title */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Who <span className="gradient-coral-text">We Are</span>
@@ -51,13 +50,12 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Founder Image */}
           <div
-            className={`relative transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
+            className={`relative transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              }`}
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass">
               <Image
-                src="/images/founder.webp"
+                src="/Founder/dul.jpg"
                 alt="VMI Media Founder"
                 fill
                 className="object-cover"
@@ -79,9 +77,8 @@ export default function About() {
 
           {/* About Content */}
           <div
-            className={`transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
+            className={`transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              }`}
           >
             <div className="glass rounded-2xl p-8 md:p-10">
               <div className="flex items-center gap-3 mb-6">

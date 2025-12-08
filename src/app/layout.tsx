@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Inter } from "next/font/google"; // Import Inter
+import { LanguageProvider } from "@/context/LanguageContext"; // Import Provider
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "VMI Media | Visualize Media Innovation",
@@ -29,8 +33,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased" style={{ fontFamily: "'Inter', sans-serif" }}>
-        {children}
+      <body className={inter.className}>
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

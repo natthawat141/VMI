@@ -39,17 +39,13 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
         <div
-          className={`transition-all duration-1000 ${
-            isVisible
+          className={`transition-all duration-1000 ${isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
-          }`}
+            }`}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#FF6A6A] animate-pulse" />
-            <span className="text-sm text-gray-400">Visualize Media Innovation</span>
-          </div>
+
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -95,19 +91,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">Scroll</span>
-            <div className="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center pt-2">
-              <div className="w-1 h-3 rounded-full bg-[#FF6A6A] animate-bounce" />
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );

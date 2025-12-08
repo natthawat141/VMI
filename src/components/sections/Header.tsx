@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 const navItems = [
   { label: "Solutions", href: "#services" },
@@ -14,6 +15,7 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +27,10 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-[#121212]/95 backdrop-blur-md shadow-lg"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between h-16 md:h-20">
@@ -62,13 +63,24 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* CTA Button */}
-          <Link
-            href="#contact"
-            className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full gradient-coral text-white font-medium text-sm hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-[#FF6A6A]/25"
-          >
-            Get in Touch
-          </Link>
+          <div className="hidden md:flex items-center gap-6">
+            {/* Language Switcher */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 text-sm font-medium transition-colors"
+            >
+              <span className={language === "th" ? "text-white" : "text-gray-500"}>TH</span>
+              <span className="text-gray-600">|</span>
+              <span className={language === "en" ? "text-white" : "text-gray-500"}>EN</span>
+            </button>
+            {/* CTA Button */}
+            <Link
+              href="#contact"
+              className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full gradient-coral text-white font-medium text-sm hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-[#FF6A6A]/25"
+            >
+              {language === "th" ? "ติดต่อเรา" : "Get in Touch"}
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -103,9 +115,8 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? "max-h-64 pb-4" : "max-h-0"
-          }`}
+          className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? "max-h-64 pb-4" : "max-h-0"
+            }`}
         >
           <ul className="flex flex-col gap-4">
             {navItems.map((item) => (
@@ -120,12 +131,23 @@ export default function Header() {
               </li>
             ))}
             <li>
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-200 text-base py-2"
+              >
+                <span>Language:</span>
+                <span className={language === "th" ? "text-white font-bold" : "text-gray-500"}>TH</span>
+                <span className="text-gray-600">|</span>
+                <span className={language === "en" ? "text-white font-bold" : "text-gray-500"}>EN</span>
+              </button>
+            </li>
+            <li>
               <Link
                 href="#contact"
                 className="inline-flex items-center px-5 py-2.5 rounded-full gradient-coral text-white font-medium text-sm"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get in Touch
+                {language === "th" ? "ติดต่อเรา" : "Get in Touch"}
               </Link>
             </li>
           </ul>

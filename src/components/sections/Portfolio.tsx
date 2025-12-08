@@ -3,71 +3,117 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-const categories = ["All", "AR", "Music", "Events", "Web"];
+// Categories based on folder structure
+const categories = ["All", "AR", "Music Marketing", "Event Organize", "Website Creation"];
 
 const portfolioItems = [
+  // AR Items
   {
-    id: 1,
-    title: "AR Filter Campaign",
+    id: "ar-1",
+    title: "AR Experience 01",
     category: "AR",
-    description: "Interactive AR filter for social media engagement",
-    image: "/images/portfolio/ar-1.jpg",
+    description: "Immersive AR Brand Activation",
+    src: "/AR/video_01.mp4",
     type: "video",
   },
   {
-    id: 2,
-    title: "AR Brand Experience",
+    id: "ar-2",
+    title: "AR Experience 02",
     category: "AR",
-    description: "Immersive brand activation using augmented reality",
-    image: "/images/portfolio/ar-2.jpg",
+    description: "Interactive Social Media Filter",
+    src: "/AR/video_02.mp4",
     type: "video",
   },
   {
-    id: 3,
-    title: "Music Video Promotion",
-    category: "Music",
-    description: "Viral marketing campaign for independent artist",
-    image: "/images/portfolio/music-1.jpg",
+    id: "ar-3",
+    title: "AR Experience 03",
+    category: "AR",
+    description: "Product Visualization",
+    src: "/AR/video_03.mp4",
     type: "video",
   },
   {
-    id: 4,
-    title: "Album Launch Campaign",
-    category: "Music",
-    description: "Strategic release campaign for new album",
-    image: "/images/portfolio/music-2.jpg",
+    id: "ar-4",
+    title: "AR Experience 04",
+    category: "AR",
+    description: "Creative AR Campaign",
+    src: "/AR/video_04.mp4",
+    type: "video",
+  },
+
+  // Music Marketing Items
+  {
+    id: "music-1",
+    title: "Music Campaign 01",
+    category: "Music Marketing",
+    description: "Viral Music Video Promotion",
+    src: "/Music_Marketing/video_01.mp4",
     type: "video",
   },
   {
-    id: 5,
-    title: "Corporate Event",
-    category: "Events",
-    description: "Full-scale corporate event management",
-    image: "/images/portfolio/event-1.jpg",
+    id: "music-2",
+    title: "Music Campaign 02",
+    category: "Music Marketing",
+    description: "Artist Branding Strategy",
+    src: "/Music_Marketing/video_02.mp4",
+    type: "video",
+  },
+  {
+    id: "music-3",
+    title: "Music Campaign 03",
+    category: "Music Marketing",
+    description: "Album Launch Event",
+    src: "/Music_Marketing/video_03.mp4",
+    type: "video",
+  },
+  {
+    id: "music-4",
+    title: "Music Campaign 04",
+    category: "Music Marketing",
+    description: "Digital Streaming Campaign",
+    src: "/Music_Marketing/video_04.mp4",
+    type: "video",
+  },
+  {
+    id: "music-5",
+    title: "Music Campaign 05",
+    category: "Music Marketing",
+    description: "Fan Engagement Activity",
+    src: "/Music_Marketing/video_05.mp4",
+    type: "video",
+  },
+  {
+    id: "music-6",
+    title: "Music Campaign 06",
+    category: "Music Marketing",
+    description: "Cross-platform Promotion",
+    src: "/Music_Marketing/video_06.mp4",
+    type: "video",
+  },
+  {
+    id: "music-7",
+    title: "Music Campaign 07",
+    category: "Music Marketing",
+    description: "Integrated Marketing Strategy",
+    src: "/Music_Marketing/video_07.mp4",
+    type: "video",
+  },
+
+  // Event Organize Items
+  {
+    id: "event-1",
+    title: "Event Job 01",
+    category: "Event Organize",
+    description: "Corporate Seminar & Workshop",
+    src: "/Event_Organize/Job_01/image_01.jpg",
     type: "image",
   },
   {
-    id: 6,
-    title: "Product Launch Event",
-    category: "Events",
-    description: "Exclusive product launch experience",
-    image: "/images/portfolio/event-2.jpg",
-    type: "image",
-  },
-  {
-    id: 7,
-    title: "E-commerce Website",
-    category: "Web",
-    description: "Modern e-commerce platform development",
-    image: "/images/portfolio/web-1.jpg",
-    type: "image",
-  },
-  {
-    id: 8,
-    title: "Corporate Website",
-    category: "Web",
-    description: "Professional corporate web presence",
-    image: "/images/portfolio/web-2.jpg",
+    id: "event-2",
+    title: "Event Job 02",
+    category: "Event Organize",
+    description: "Exclusive Product Launch",
+    src: "/Event_Organize/Job_02/image_01.jpg",
     type: "image",
   },
 ];
@@ -76,6 +122,9 @@ export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Video refs to handle hover play
+  const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -99,6 +148,19 @@ export default function Portfolio() {
       ? portfolioItems
       : portfolioItems.filter((item) => item.category === activeCategory);
 
+  const handleMouseEnter = (id: string) => {
+    if (videoRefs.current[id]) {
+      videoRefs.current[id]?.play().catch(e => console.log("Play failed", e));
+    }
+  };
+
+  const handleMouseLeave = (id: string) => {
+    if (videoRefs.current[id]) {
+      videoRefs.current[id]?.pause();
+      if (videoRefs.current[id]) videoRefs.current[id]!.currentTime = 0;
+    }
+  };
+
   return (
     <section
       id="portfolio"
@@ -112,9 +174,8 @@ export default function Portfolio() {
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Title */}
         <div
-          className={`text-center mb-12 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Our <span className="gradient-coral-text">Portfolio</span>
@@ -126,19 +187,17 @@ export default function Portfolio() {
 
         {/* Category Filter */}
         <div
-          className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeCategory === category
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
                   ? "gradient-coral text-white shadow-lg shadow-[#FF6A6A]/25"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-              }`}
+                }`}
             >
               {category}
             </button>
@@ -150,27 +209,33 @@ export default function Portfolio() {
           {filteredItems.map((item, index) => (
             <div
               key={item.id}
-              className={`group relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ${
-                isVisible
+              className={`group relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 100 + 300}ms` }}
+                }`}
+              style={{ transitionDelay: `${index * 50}ms` }}
+              onMouseEnter={() => item.type === 'video' && handleMouseEnter(item.id)}
+              onMouseLeave={() => item.type === 'video' && handleMouseLeave(item.id)}
             >
-              {/* Placeholder background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#222]">
-                {/* Icon placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                  {item.type === "video" ? (
-                    <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  )}
-                </div>
+              {/* Media Content */}
+              <div className="absolute inset-0 bg-[#1a1a1a]">
+                {item.type === 'video' ? (
+                  <video
+                    ref={el => { videoRefs.current[item.id] = el }}
+                    src={item.src}
+                    className="w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                )}
               </div>
 
               {/* Hover Overlay */}
@@ -215,9 +280,8 @@ export default function Portfolio() {
 
         {/* View All Button */}
         <div
-          className={`text-center mt-12 transition-all duration-700 delay-500 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`text-center mt-12 transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <button className="inline-flex items-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all duration-300">
             View All Projects
